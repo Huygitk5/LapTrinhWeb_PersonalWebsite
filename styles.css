@@ -1,0 +1,25 @@
+/* Custom Font Setup */
+.font-tech { font-family: 'Orbitron', sans-serif; }
+.font-mono { font-family: 'Share Tech Mono', monospace; }
+
+/* 3D Utilities */
+.perspective-1500 { perspective: 1500px; }
+.transform-style-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; }
+
+/* Animation Timing */
+.ease-cubic { transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); }
+
+/* Background Scan Animation */
+@keyframes scan {
+    0% { top: 0; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+.animate-scan { animation: scan 3s linear infinite; }
+
+/* Custom Scrollbar for content */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #0891b2; border-radius: 2px; }

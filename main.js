@@ -8,7 +8,7 @@ lucide.createIcons();
 const slideConfig = {
     1: 42,   // Tuần 1 có 5 ảnh
     2: 158,   // Tuần 2 có 4 ảnh
-    3: 6,   // Tuần 3 có 6 ảnh
+    3: 91,   // Tuần 3 có 6 ảnh
     4: 3,   // Tuần 4...
     5: 5,
     6: 5,
@@ -67,22 +67,6 @@ function changeSlide(week, direction) {
  * Hàm Execute Links (Dùng chung)
  * @param {number} week - Số tuần
  */
-// function executeLinks(week) {
-//     // Tìm các thẻ a có class: w1-link, w2-link...
-//     const links = document.querySelectorAll(`.w${week}-link`);
-    
-//     if (links.length === 0) {
-//         alert(`No links found for Week ${week}`);
-//         return;
-//     }
-
-//     if (confirm(`System: Open ${links.length} tabs for Week ${week}?`)) {
-//         links.forEach(link => {
-//             window.open(link.href, '_blank');
-//         });
-//     }
-// }
-
 function executeLinks(week) {
     // Tìm các thẻ a có class: w1-link, w2-link...
     const links = document.querySelectorAll(`.w${week}-link`);
@@ -93,14 +77,12 @@ function executeLinks(week) {
     }
 
     if (confirm(`System: Open ${links.length} tabs for Week ${week}?`)) {
-        links.forEach((link, index) => {
-            // SỬA Ở ĐÂY: Thêm setTimeout để mở lần lượt từng tab
-            setTimeout(() => {
-                window.open(link.href, '_blank');
-            }, index * 300); // Tab sau mở chậm hơn tab trước 300ms (0.3 giây)
+        links.forEach(link => {
+            window.open(link.href, '_blank');
         });
     }
 }
+
 
 // =================================================================
 // 3. LOGIC LẬT SÁCH (GIỮ NGUYÊN)

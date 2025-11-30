@@ -2,10 +2,21 @@
 .font-tech { font-family: 'Orbitron', sans-serif; }
 .font-mono { font-family: 'Share Tech Mono', monospace; }
 
-/* 3D Utilities */
-.perspective-1500 { perspective: 1500px; }
-.transform-style-3d { transform-style: preserve-3d; }
-.backface-hidden { backface-visibility: hidden; }
+/* 3D Utilities - ĐÃ FIX LỖI CHỮ NGƯỢC */
+.perspective-1500 { 
+    perspective: 1500px; 
+    -webkit-perspective: 1500px; /* Quan trọng cho Safari/Chrome */
+}
+
+.transform-style-3d { 
+    transform-style: preserve-3d; 
+    -webkit-transform-style: preserve-3d; /* Quan trọng */
+}
+
+.backface-hidden { 
+    backface-visibility: hidden; 
+    -webkit-backface-visibility: hidden; /* CỰC KỲ QUAN TRỌNG: Dòng này giúp ẩn mặt sau bị ngược */
+}
 
 /* Animation Timing */
 .ease-cubic { transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); }
@@ -23,3 +34,9 @@
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #0f172a; }
 ::-webkit-scrollbar-thumb { background: #0891b2; border-radius: 2px; }
+
+/* Thêm class này để đảm bảo thanh cuộn đẹp trên Firefox (nếu cần) */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #0891b2 #0f172a;
+}

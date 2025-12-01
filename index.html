@@ -215,7 +215,7 @@
                             </div>
 
                             <div class="flex-1 min-h-0 bg-black/40 border border-cyan-800/50 rounded overflow-hidden relative group mb-2 flex flex-col">
-                                <div class="flex-1 relative flex items-center justify-center bg-slate-950 overflow-hidden">
+                                <div class="flex-1 relative flex items-center justify-center bg-slate-950 overflow-hidden"> 
                                     <img id="w2-slide-img" src="./assets/image/Slide/Week2/Slide1.JPG" class="max-w-full max-h-full object-contain p-2">
                                     <div class="absolute inset-0 pointer-events-none bg-cyan-500/5 mix-blend-overlay"></div>
                                 </div>
@@ -268,7 +268,7 @@
 
                             <div class="h-24 bg-slate-950/50 border-l-2 border-cyan-500 mb-2 shrink-0 flex flex-col justify-center px-2">
                                 <ul class="text-cyan-100/80 text-xs font-mono space-y-1">
-                                    <li><p>- JSPs: EL / JSTL.</p></li>
+                                    <li><p>- Làm việc với JSPs</p></li>
                                     <li><p>- Làm việc với Sessions và Cookies</p></li>
                                 </ul>
                             </div>
@@ -311,26 +311,66 @@
 
                 <div class="sheet absolute inset-0 w-full h-full transform-style-3d origin-left transition-all duration-1000 ease-cubic" data-index="3" style="z-index: 2;">
                     <div class="absolute inset-0 backface-hidden bg-slate-900 border-l border-cyan-900/50 overflow-hidden" 
-                         style="z-index: 2; border-right: 1px solid rgba(6,182,212,0.3); background-image: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 20%);">
-                         <div class="h-full p-6 flex flex-col text-cyan-100 relative">
+                        style="z-index: 2; border-right: 1px solid rgba(6,182,212,0.3); background-image: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 20%);">
+                        
+                        <div class="h-full p-5 flex flex-col text-cyan-100 relative">
                             <div class="absolute top-0 right-0 p-4 opacity-20"><i data-lucide="zap"></i></div>
-                            <div class="border-b border-cyan-800 pb-2 mb-4 flex justify-between items-end relative z-10">
-                               <div>
-                                   <span class="text-[10px] font-mono tracking-widest text-cyan-600 uppercase">Mission Protocol 04</span>
-                                   <h2 class="text-xl font-bold text-white font-tech">REACT KERNEL</h2>
-                               </div>
-                               <div class="text-4xl font-bold text-cyan-900 font-tech opacity-50 select-none">04</div>
+
+                            <div class="border-b border-cyan-800 pb-3 mb-2 flex justify-between items-end relative z-10 shrink-0">
+                                <div>
+                                    <span class="text-[10px] font-mono tracking-widest text-cyan-600 uppercase">Mission Protocol 04</span>
+                                    <h2 class="text-xl font-bold text-white font-tech line-clamp-3 min-h-[3.5rem]">
+                                        JSP EL, Tag Libraries and JDBC-Based Database Development
+                                    </h2>
+                                </div>
+                                <div class="text-4xl font-bold text-cyan-900 font-tech opacity-50 select-none mb-1">04</div>
                             </div>
-                            <div class="bg-slate-950/50 p-3 border-l-2 border-cyan-500 mb-4">
-                               <p class="text-cyan-100/80 text-sm font-mono">Quản lý trạng thái (State) và luồng dữ liệu (Props).</p>
+
+                            <div class="h-24 bg-slate-950/50 border-l-2 border-cyan-500 mb-2 shrink-0 flex flex-col justify-center px-2">
+                                <ul class="text-cyan-100/80 text-xs font-mono space-y-1">
+                                    <li><p>- EL/JSTL.</p></li>
+                                    <li><p>- JSP tags.</p></li>
+                                    <li><p>- Cách sử dụng MySQL/PostgreSQL.</p></li>
+                                    <li><p>- Sử dụng JDBC làm việc với cơ sở dữ liệu.</p></li>
+                                </ul>
                             </div>
-                            <div class="mt-auto pt-4 border-t border-cyan-900/50 border-dashed flex justify-between items-end">
-                               <div><span class="text-[10px] text-cyan-600">Performance</span><div class="text-lg font-bold font-mono text-green-400">85%</div></div>
-                               <a href="#" class="bg-cyan-900/20 border border-cyan-500/50 text-cyan-400 px-4 py-2 text-xs font-bold font-tech uppercase hover:bg-cyan-500 hover:text-black transition-colors">Execute</a>
+
+                            <div class="flex-1 min-h-0 bg-black/40 border border-cyan-800/50 rounded overflow-hidden relative group mb-2 flex flex-col">
+                                <div class="flex-1 relative flex items-center justify-center bg-slate-950 overflow-hidden">
+                                    <img id="w4-slide-img" src="./assets/image/Slide/Week4/Slide1.JPG" class="max-w-full max-h-full object-contain p-2">
+                                    <div class="absolute inset-0 pointer-events-none bg-cyan-500/5 mix-blend-overlay"></div>
+                                </div>
+                                <div class="h-8 shrink-0 bg-cyan-950/80 border-t border-cyan-800 flex justify-between items-center px-3 text-[10px] font-mono">
+                                    <button onclick="changeSlide(4, -1)" class="hover:text-cyan-400 font-bold p-1">[ PREV ]</button>
+                                    <span class="text-cyan-500 tracking-widest">SLIDE: <span id="w4-slide-num" class="text-white">262</span></span>
+                                    <button onclick="changeSlide(4, 1)" class="hover:text-cyan-400 font-bold p-1">[ NEXT ]</button>
+                                </div>
                             </div>
-                            <div class="absolute bottom-2 right-4 text-[10px] text-cyan-800 font-mono">DATA_LOG_WEEK_04</div>
-                       </div>
+
+                            <div class="h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent w-full mb-2 shrink-0"></div>
+
+                            <div class="h-[15%] flex flex-col mb-1 shrink-0">
+                                <h3 class="text-[10px] font-bold text-cyan-600 uppercase mb-1 flex items-center gap-1"><i data-lucide="link" class="w-3 h-3"></i> Output Links</h3>
+                                <div class="overflow-y-auto pr-1 custom-scrollbar flex-1">
+                                    <ul class="space-y-1 text-xs font-mono">
+                                        <li><a href="https://laptrinhweb-ch09-1.onrender.com" target="_blank" class="w4-link block text-cyan-200/70 hover:text-cyan-400 hover:bg-cyan-900/30 px-1 truncate border-l-2 border-transparent hover:border-cyan-500">> Ch09_Ex_Download.html</a></li>
+                                        <li><a href="https://laptrinhweb-ch12-ex1.onrender.com" target="_blank" class="w4-link block text-cyan-200/70 hover:text-cyan-400 hover:bg-cyan-900/30 px-1 truncate border-l-2 border-transparent hover:border-cyan-500">> Ch12_Ex01_SqlGateway.html</a></li>
+                                        <li><a href="https://laptrinhweb-ch12-ex2.onrender.com" target="_blank" class="w4-link block text-cyan-200/70 hover:text-cyan-400 hover:bg-cyan-900/30 px-1 truncate border-l-2 border-transparent hover:border-cyan-500">> Ch12_Ex02_UserAdmin.html</a></li>
+                                    </ul>
+                                </div>
+                                <p class="text-[9px] italic text-white-50 mt-1 font-mono border-t border-cyan-900/30 pt-1 truncate">
+                                    * Note: Hệ thống đang tải, nếu Website chưa hiện lên vui lòng chờ...
+                                </p>
+                            </div>
+
+                            <div class="pt-2 border-t border-cyan-900/50 border-dashed flex justify-between items-center shrink-0">
+                                <div><span class="text-[10px] text-cyan-600">Sync Status:</span> <span class="text-[10px] font-bold text-green-400">ONLINE</span></div>
+                                <button onclick="executeLinks(4)" class="bg-cyan-500/10 border border-cyan-500/50 text-cyan-400 px-3 py-1 text-[10px] font-bold font-tech uppercase hover:bg-cyan-500 hover:text-black transition-all">Execute All</button>
+                            </div>
+                            <div class="absolute bottom-2 text-[10px] text-cyan-800 font-mono">DATA_LOG_WEEK_04</div>
+                        </div>
                     </div>
+
                     <div class="absolute inset-0 backface-hidden bg-slate-900 border-r border-cyan-900/50 overflow-hidden" 
                          style="z-index: 1; transform: rotateY(180deg); border-left: 1px solid rgba(6,182,212,0.3); background-image: linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 20%);">
                          <div class="h-full p-6 flex flex-col text-cyan-100 relative">

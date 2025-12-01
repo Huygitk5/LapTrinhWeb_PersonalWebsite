@@ -9,7 +9,7 @@ const slideConfig = {
     1: 42,   // Tuần 1 có 5 ảnh
     2: 158,   // Tuần 2 có 4 ảnh
     3: 91,   // Tuần 3 có 6 ảnh
-    4: 3,   // Tuần 4...
+    4: 206,   // Tuần 4...
     5: 5,
     6: 5,
     7: 5,

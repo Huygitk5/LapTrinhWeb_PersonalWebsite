@@ -3,9 +3,9 @@ lucide.createIcons();
 
 // 1. CẤU HÌNH SỐ LƯỢNG SLIDE
 const slideConfig = {
-    1: 42, 
-    2: 158, 
-    3: 91, 
+    1: 42,
+    2: 158,
+    3: 91,
     4: 206
 };
 
@@ -28,7 +28,7 @@ const controlsContainer = document.getElementById('controls-container');
 function updateBook() {
     if (currentSheet > 0) {
         bookWrapper.classList.remove('book-idle-spin');
-        bookWrapper.style.transform = 'rotateY(0deg)'; 
+        bookWrapper.style.transform = 'rotateY(0deg)';
         bookWrapper.classList.remove('-translate-x-1/2');
         bookWrapper.classList.add('translate-x-0');
         backPlateLeft.classList.remove('opacity-0');
@@ -46,17 +46,17 @@ function updateBook() {
         statusBar.innerText = "STATUS: LOCKED";
         controlsContainer.classList.add('opacity-0', 'pointer-events-none');
         controlsContainer.classList.remove('opacity-100', 'pointer-events-auto');
-        bookWrapper.style.transform = ''; 
+        bookWrapper.style.transform = '';
         bookWrapper.classList.add('book-idle-spin');
     }
 
     sheets.forEach((sheet, index) => {
         if (currentSheet > index) {
             sheet.style.transform = 'rotateY(-180deg)';
-            sheet.style.zIndex = index; 
+            sheet.style.zIndex = index;
         } else {
             sheet.style.transform = 'rotateY(0deg)';
-            sheet.style.zIndex = totalSheets - index; 
+            sheet.style.zIndex = totalSheets - index;
         }
     });
 
@@ -96,7 +96,7 @@ function changeSlide(week, direction) {
 
     const imgElement = document.getElementById(`w${week}-slide-img`);
     const numElement = document.getElementById(`w${week}-slide-num`);
-    
+
     if (imgElement && numElement) {
         imgElement.src = getSlidePath(week, currentIndices[week]);
         numElement.innerText = `${currentIndices[week] + 1} / ${maxSlides}`;
@@ -133,7 +133,7 @@ canvas.height = window.innerHeight;
 const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const charArray = chars.split('');
 const fontSize = 14;
-const columns = canvas.width / fontSize; 
+const columns = canvas.width / fontSize;
 const drops = [];
 for (let i = 0; i < columns; i++) { drops[i] = 1; }
 
@@ -143,7 +143,7 @@ function drawMatrix() {
     ctx.font = 'bold ' + fontSize + 'px monospace';
     for (let i = 0; i < drops.length; i++) {
         const text = charArray[Math.floor(Math.random() * charArray.length)];
-        ctx.fillStyle = 'rgba(6, 182, 212, 0.8)'; 
+        ctx.fillStyle = 'rgba(6, 182, 212, 0.8)';
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
         drops[i]++;
@@ -156,17 +156,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const bootLogs = document.getElementById('boot-logs');
     const bootStatus = document.getElementById('boot-status');
     const loadingScreen = document.getElementById('loading-screen');
-    const messages = ["Connecting...", "Verifying User...", "Loading Assets...", "System Ready."];
+    const messages = ["Connecting...", "Verifying User: DOAN QUOC HUY...", "Loading Assets...", "System Ready."];
     let msgIndex = 0; let charIndex = 0;
-    
+
     function typeLine() {
         if (msgIndex < messages.length) {
             let currentLine = messages[msgIndex];
             if (charIndex === 0) {
                 const newLine = document.createElement('div');
-                newLine.classList.add('flex', 'items-baseline'); 
+                newLine.classList.add('flex', 'items-baseline');
                 const timeString = new Date().toLocaleTimeString('en-US', { hour12: false });
-                newLine.innerHTML = `<span class="text-cyan-900 text-[10px] mr-2 font-mono shrink-0">[${timeString}]</span><span class="text-cyan-600 mr-2 shrink-0">➜</span><span class="log-content"></span>`; 
+                newLine.innerHTML = `<span class="text-cyan-900 text-[10px] mr-2 font-mono shrink-0">[${timeString}]</span><span class="text-cyan-600 mr-2 shrink-0">➜</span><span class="log-content"></span>`;
                 bootLogs.appendChild(newLine);
             }
             const currentLogLine = bootLogs.lastElementChild.querySelector('.log-content');

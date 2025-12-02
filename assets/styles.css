@@ -1,42 +1,208 @@
 /* Custom Font Setup */
-.font-tech { font-family: 'Orbitron', sans-serif; }
-.font-mono { font-family: 'Share Tech Mono', monospace; }
+.font-tech {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.font-mono {
+    font-family: 'Share Tech Mono', monospace;
+}
+
+/* Portfolio Title Spacing */
+.tracking-tighter {
+    letter-spacing: 0.1em !important;
+}
 
 /* 3D Utilities - ĐÃ FIX LỖI CHỮ NGƯỢC */
-.perspective-1500 { 
-    perspective: 1500px; 
-    -webkit-perspective: 1500px; /* Quan trọng cho Safari/Chrome */
+.perspective-1500 {
+    perspective: 1500px;
+    -webkit-perspective: 1500px;
+    /* Quan trọng cho Safari/Chrome */
 }
 
-.transform-style-3d { 
-    transform-style: preserve-3d; 
-    -webkit-transform-style: preserve-3d; /* Quan trọng */
+.transform-style-3d {
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    /* Quan trọng */
 }
 
-.backface-hidden { 
-    backface-visibility: hidden; 
-    -webkit-backface-visibility: hidden; /* CỰC KỲ QUAN TRỌNG: Dòng này giúp ẩn mặt sau bị ngược */
+.backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* CỰC KỲ QUAN TRỌNG: Dòng này giúp ẩn mặt sau bị ngược */
 }
 
 /* Animation Timing */
-.ease-cubic { transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000); }
+.ease-cubic {
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}
 
 /* Background Scan Animation */
 @keyframes scan {
-    0% { top: 0; opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { top: 100%; opacity: 0; }
+    0% {
+        top: 0;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
 }
-.animate-scan { animation: scan 3s linear infinite; }
+
+.animate-scan {
+    animation: scan 3s linear infinite;
+}
+
 
 /* Custom Scrollbar for content */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #0f172a; }
-::-webkit-scrollbar-thumb { background: #0891b2; border-radius: 2px; }
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0891b2;
+    border-radius: 2px;
+}
 
 /* Thêm class này để đảm bảo thanh cuộn đẹp trên Firefox (nếu cần) */
 .custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: #0891b2 #0f172a;
+}
+
+/* Hiệu ứng bóng neon tùy chỉnh */
+.neon-box {
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.5),
+        0 0 20px rgba(6, 182, 212, 0.3),
+        inset 0 0 15px rgba(6, 182, 212, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.neon-box:hover {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.8),
+        0 0 40px rgba(6, 182, 212, 0.5),
+        inset 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+/* --- LOADING SCREEN STYLES --- */
+
+/* Class để ẩn màn hình loading đi sau khi chạy xong */
+.loading-finished {
+    opacity: 0;
+    visibility: hidden;
+    /* Ẩn hoàn toàn để không chặn click */
+    pointer-events: none;
+    transition: all 1s ease-out;
+    /* Hiệu ứng mờ dần trong 1 giây */
+}
+
+/* Hiệu ứng nhấp nháy con trỏ (tùy chọn) */
+.cursor-blink::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* --- SMALL NEON BUTTON --- */
+.btn-neon-small {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+
+    /* Màu sắc chủ đạo */
+    color: #06b6d4;
+    border: 1px solid #06b6d4;
+    /* Viền mảnh 1px cho tinh tế */
+
+    /* Font chữ & Kích thước (Đã thu nhỏ) */
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-size: 10px;
+    /* Chữ nhỏ */
+    letter-spacing: 1px;
+    /* Khoảng cách chữ vừa phải */
+    padding: 8px 24px;
+    /* Độ rộng nút nhỏ gọn */
+
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    /* Hiệu ứng phát sáng nhẹ mặc định */
+    box-shadow: 0 0 5px rgba(6, 182, 212, 0.2),
+        inset 0 0 5px rgba(6, 182, 212, 0.1);
+    animation: neon-pulse-small 3s infinite alternate;
+}
+
+/* Animation "thở" nhẹ nhàng */
+@keyframes neon-pulse-small {
+    0% {
+        box-shadow: 0 0 5px rgba(6, 182, 212, 0.2),
+            inset 0 0 5px rgba(6, 182, 212, 0.1);
+        opacity: 0.8;
+    }
+
+    100% {
+        box-shadow: 0 0 15px rgba(6, 182, 212, 0.6),
+            inset 0 0 10px rgba(6, 182, 212, 0.4);
+        opacity: 1;
+    }
+}
+
+/* Hiệu ứng khi di chuột vào (Sáng rực lên) */
+.btn-neon-small:hover {
+    background: rgba(6, 182, 212, 0.1);
+    /* Nền sáng nhẹ */
+    color: #fff;
+    /* Chữ trắng */
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.8),
+        0 0 40px rgba(6, 182, 212, 0.4);
+    border-color: #fff;
+    transform: scale(1.05);
+    /* Phóng to cực nhẹ */
+}
+
+/* Luồng sáng quét qua (Scan effect) */
+.btn-neon-small::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    transform: skewX(-25deg);
+    /* Nghiêng luồng sáng */
+    transition: 0.5s;
+}
+
+.btn-neon-small:hover::before {
+    left: 150%;
+    /* Chạy vút qua */
+    transition: 0.7s;
 }

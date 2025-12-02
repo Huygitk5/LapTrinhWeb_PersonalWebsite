@@ -1,96 +1,19 @@
 // Init Icons
 lucide.createIcons();
 
-// =================================================================
-// 1. CẤU HÌNH SỐ LƯỢNG SLIDE CHO 8 TUẦN (SỬA Ở ĐÂY)
-// =================================================================
-// Cú pháp: [Tuần]: [Số lượng ảnh]
+// 1. CẤU HÌNH SỐ LƯỢNG SLIDE
 const slideConfig = {
-    1: 42,   // Tuần 1 có 5 ảnh
-    2: 158,   // Tuần 2 có 4 ảnh
-    3: 91,   // Tuần 3 có 6 ảnh
-    4: 206,   // Tuần 4...
-    5: 5,
-    6: 5,
-    7: 5,
-    8: 5
+    1: 42, 
+    2: 158, 
+    3: 91, 
+    4: 206
 };
 
-// State: Lưu vị trí trang hiện tại của từng tuần (Mặc định là 0 hết)
-const currentIndices = {
-    1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0
-};
+const currentIndices = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 };
 
-// =================================================================
-// 2. LOGIC CHUNG CHO SLIDE & LINK (KHÔNG CẦN SỬA)
-// =================================================================
-
-/**
- * Hàm lấy đường dẫn ảnh tự động
- * Quy tắc: assets/image/Slide/Week[X]/Slide[Y].JPG
- */
-function getSlidePath(week, index) {
-    // index + 1 vì file ảnh bắt đầu từ Slide1.JPG, còn code đếm từ 0
-    return `assets/image/Slide/Week${week}/Slide${index + 1}.JPG`;
-}
-
-/**
- * Hàm chuyển Slide (Dùng chung cho cả 8 tuần)
- * @param {number} week - Số tuần (1, 2, 3...)
- * @param {number} direction - Hướng (-1 là Prev, 1 là Next)
- */
-function changeSlide(week, direction) {
-    // 1. Kiểm tra xem tuần này có tồn tại trong config không
-    if (!slideConfig[week]) return;
-
-    // 2. Cập nhật chỉ số index
-    currentIndices[week] += direction;
-    
-    const maxSlides = slideConfig[week];
-
-    // Loop lại (Vòng tròn)
-    if (currentIndices[week] < 0) currentIndices[week] = maxSlides - 1;
-    if (currentIndices[week] >= maxSlides) currentIndices[week] = 0;
-
-    // 3. Tìm các thẻ HTML tương ứng để hiển thị
-    // Yêu cầu HTML phải đặt ID theo chuẩn: w1-slide-img, w2-slide-img...
-    const imgElement = document.getElementById(`w${week}-slide-img`);
-    const numElement = document.getElementById(`w${week}-slide-num`);
-    
-    if (imgElement && numElement) {
-        imgElement.src = getSlidePath(week, currentIndices[week]);
-        numElement.innerText = `${currentIndices[week] + 1}/${maxSlides}`;
-    }
-}
-
-/**
- * Hàm Execute Links (Dùng chung)
- * @param {number} week - Số tuần
- */
-function executeLinks(week) {
-    // Tìm các thẻ a có class: w1-link, w2-link...
-    const links = document.querySelectorAll(`.w${week}-link`);
-    
-    if (links.length === 0) {
-        alert(`No links found for Week ${week}`);
-        return;
-    }
-
-    if (confirm(`System: Open ${links.length} tabs for Week ${week}?`)) {
-        links.forEach(link => {
-            window.open(link.href, '_blank');
-        });
-    }
-}
-
-
-// =================================================================
-// 3. LOGIC LẬT SÁCH (GIỮ NGUYÊN)
-// =================================================================
-
+// 2. LOGIC LẬT SÁCH
 let currentSheet = 0;
-const totalSheets = 5; 
-// Lưu ý: Nếu bạn có 8 tuần, bạn sẽ cần tăng số lượng Sheet trong HTML và sửa số totalSheets này lên tương ứng (ví dụ 8 tuần = 4 tờ giấy 2 mặt + bìa => totalSheets = 5)
+const totalSheets = 4; // Bìa + 3 tờ nội dung
 
 const bookWrapper = document.getElementById('book-wrapper');
 const backPlateLeft = document.getElementById('back-plate-left');
@@ -104,6 +27,8 @@ const controlsContainer = document.getElementById('controls-container');
 
 function updateBook() {
     if (currentSheet > 0) {
+        bookWrapper.classList.remove('book-idle-spin');
+        bookWrapper.style.transform = 'rotateY(0deg)'; 
         bookWrapper.classList.remove('-translate-x-1/2');
         bookWrapper.classList.add('translate-x-0');
         backPlateLeft.classList.remove('opacity-0');
@@ -121,6 +46,8 @@ function updateBook() {
         statusBar.innerText = "STATUS: LOCKED";
         controlsContainer.classList.add('opacity-0', 'pointer-events-none');
         controlsContainer.classList.remove('opacity-100', 'pointer-events-auto');
+        bookWrapper.style.transform = ''; 
+        bookWrapper.classList.add('book-idle-spin');
     }
 
     sheets.forEach((sheet, index) => {
@@ -155,9 +82,107 @@ function prevPage() {
     }
 }
 
-if(startBtn) {
-    startBtn.addEventListener('click', nextPage);
+// 3. LOGIC SLIDE & LINKS
+function getSlidePath(week, index) {
+    return `assets/image/Slide/Week${week}/Slide${index + 1}.JPG`;
 }
+
+function changeSlide(week, direction) {
+    if (!slideConfig[week]) return;
+    currentIndices[week] += direction;
+    const maxSlides = slideConfig[week];
+    if (currentIndices[week] < 0) currentIndices[week] = maxSlides - 1;
+    if (currentIndices[week] >= maxSlides) currentIndices[week] = 0;
+
+    const imgElement = document.getElementById(`w${week}-slide-img`);
+    const numElement = document.getElementById(`w${week}-slide-num`);
+    
+    if (imgElement && numElement) {
+        imgElement.src = getSlidePath(week, currentIndices[week]);
+        numElement.innerText = `${currentIndices[week] + 1} / ${maxSlides}`;
+    }
+}
+
+function executeLinks(week) {
+    const links = document.querySelectorAll(`.w${week}-link`);
+    if (links.length === 0) { alert(`No links found for Week ${week}`); return; }
+    if (confirm(`System: Launching ${links.length} protocols for Week ${week}?`)) {
+        let blocked = false;
+        links.forEach((link, index) => {
+            if (index === 0) {
+                const win = window.open(link.href, '_blank');
+                if (!win) blocked = true;
+            } else {
+                setTimeout(() => {
+                    const win = window.open(link.href, '_blank');
+                    if (!win && !blocked) {
+                        alert("⚠️ Browser blocked popup. Please allow popups.");
+                        blocked = true;
+                    }
+                }, index * 800);
+            }
+        });
+    }
+}
+
+// 4. MATRIX & LOADING
+const canvas = document.getElementById('matrix-bg');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const charArray = chars.split('');
+const fontSize = 14;
+const columns = canvas.width / fontSize; 
+const drops = [];
+for (let i = 0; i < columns; i++) { drops[i] = 1; }
+
+function drawMatrix() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = 'bold ' + fontSize + 'px monospace';
+    for (let i = 0; i < drops.length; i++) {
+        const text = charArray[Math.floor(Math.random() * charArray.length)];
+        ctx.fillStyle = 'rgba(6, 182, 212, 0.8)'; 
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+    }
+}
+setInterval(drawMatrix, 33);
+window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const bootLogs = document.getElementById('boot-logs');
+    const bootStatus = document.getElementById('boot-status');
+    const loadingScreen = document.getElementById('loading-screen');
+    const messages = ["Connecting...", "Verifying User...", "Loading Assets...", "System Ready."];
+    let msgIndex = 0; let charIndex = 0;
+    
+    function typeLine() {
+        if (msgIndex < messages.length) {
+            let currentLine = messages[msgIndex];
+            if (charIndex === 0) {
+                const newLine = document.createElement('div');
+                newLine.classList.add('flex', 'items-baseline'); 
+                const timeString = new Date().toLocaleTimeString('en-US', { hour12: false });
+                newLine.innerHTML = `<span class="text-cyan-900 text-[10px] mr-2 font-mono shrink-0">[${timeString}]</span><span class="text-cyan-600 mr-2 shrink-0">➜</span><span class="log-content"></span>`; 
+                bootLogs.appendChild(newLine);
+            }
+            const currentLogLine = bootLogs.lastElementChild.querySelector('.log-content');
+            currentLogLine.innerHTML += currentLine.charAt(charIndex);
+            charIndex++;
+            bootLogs.scrollTop = bootLogs.scrollHeight;
+            if (charIndex < currentLine.length) setTimeout(typeLine, 15);
+            else { msgIndex++; charIndex = 0; setTimeout(typeLine, 100); }
+        } else {
+            bootStatus.classList.remove('hidden');
+            bootStatus.classList.add('flex');
+            setTimeout(() => { loadingScreen.classList.add('loading-finished'); setTimeout(() => loadingScreen.remove(), 1000); }, 1000);
+        }
+    }
+    typeLine();
+});
 
 // Init
 updateBook();

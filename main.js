@@ -6,17 +6,19 @@ const slideConfig = {
     1: 42,
     2: 158,
     3: 91,
-    4: 206
+    4: 206,
+    5: 67
 };
 
-const currentIndices = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0 };
+const currentIndices = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
 // 2. LOGIC LẬT SÁCH
 let currentSheet = 0;
-const totalSheets = 4; // Bìa + 3 tờ nội dung
+const totalSheets = 5; // Bìa + 3 tờ nội dung
 
 const bookWrapper = document.getElementById('book-wrapper');
 const backPlateLeft = document.getElementById('back-plate-left');
+const backPlateRight = document.getElementById('back-plate-right');
 const statusBar = document.getElementById('status-bar');
 const statusText = document.getElementById('status-text');
 const btnPrev = document.getElementById('btn-prev');
@@ -25,45 +27,96 @@ const sheets = document.querySelectorAll('.sheet');
 const startBtn = document.getElementById('start-btn');
 const controlsContainer = document.getElementById('controls-container');
 
+
 function updateBook() {
-    if (currentSheet > 0) {
-        bookWrapper.classList.remove('book-idle-spin');
-        bookWrapper.style.transform = 'rotateY(0deg)';
-        bookWrapper.classList.remove('-translate-x-1/2');
-        bookWrapper.classList.add('translate-x-0');
-        backPlateLeft.classList.remove('opacity-0');
-        backPlateLeft.classList.add('opacity-100');
-        statusText.innerText = ">>> NAVIGATION CONTROLS ACTIVE <<<";
-        statusBar.innerText = `SHEET: 0${currentSheet} / 0${totalSheets}`;
-        controlsContainer.classList.remove('opacity-0', 'pointer-events-none');
-        controlsContainer.classList.add('opacity-100', 'pointer-events-auto');
-    } else {
+    // === TRƯỜNG HỢP 1: BÌA ĐẦU (START - currentSheet = 0) ===
+    if (currentSheet === 0) {
+        // 1. Vị trí: Giữa màn hình
+        // QUAN TRỌNG: Phải thêm translateX(-50%) vào đây để không bị lệch
+        bookWrapper.style.transform = 'translateX(-50%) rotateY(0deg)';
+        
+        bookWrapper.classList.remove('book-idle-spin'); 
+
+        // 2. Các class hỗ trợ (Giữ nguyên để đảm bảo tính nhất quán)
         bookWrapper.classList.add('-translate-x-1/2');
         bookWrapper.classList.remove('translate-x-0');
-        backPlateLeft.classList.add('opacity-0');
+
+        // 3. Bìa lót: Ẩn trái, Hiện phải
         backPlateLeft.classList.remove('opacity-100');
+        backPlateLeft.classList.add('opacity-0');
+        if(backPlateRight) backPlateRight.style.opacity = '1';
+        
+        // 4. UI Controls
         statusText.innerText = ">>> SYSTEM STANDBY. CLICK TO INITIALIZE <<<";
         statusBar.innerText = "STATUS: LOCKED";
         controlsContainer.classList.add('opacity-0', 'pointer-events-none');
         controlsContainer.classList.remove('opacity-100', 'pointer-events-auto');
-        bookWrapper.style.transform = '';
-        bookWrapper.classList.add('book-idle-spin');
+    } 
+    
+    // === TRƯỜNG HỢP 2: BÌA CUỐI (END - currentSheet = 5) ===
+    else if (currentSheet === totalSheets) {
+        // 1. Vị trí: Giữa màn hình
+        // QUAN TRỌNG: Cũng phải thêm translateX(-50%) vào đây
+        bookWrapper.style.transform = 'translateX(50%) rotateY(0deg)';
+        
+        bookWrapper.classList.remove('book-idle-spin');
+
+        bookWrapper.classList.add('-translate-x-1/2');
+        bookWrapper.classList.remove('translate-x-0');
+
+        // 2. Bìa lót: Ẩn hết
+        backPlateLeft.classList.remove('opacity-100');
+        backPlateLeft.classList.add('opacity-0');
+        if(backPlateRight) backPlateRight.style.opacity = '0'; 
+
+        // 3. UI Controls
+        statusText.innerText = ">>> SESSION TERMINATED <<<";
+        statusBar.innerText = "STATUS: OFFLINE";
+        controlsContainer.classList.add('opacity-0', 'pointer-events-none');
+        controlsContainer.classList.remove('opacity-100', 'pointer-events-auto');
     }
 
+    // === TRƯỜNG HỢP 3: ĐANG ĐỌC SÁCH (OPEN - 1 đến 4) ===
+    else {
+        // 1. Vị trí: Lệch sang phải (translateX(0))
+        // Khi mở sách thì không cần -50% nữa
+        bookWrapper.style.transform = 'translateX(0) rotateY(0deg)';
+        
+        bookWrapper.classList.remove('book-idle-spin');
+
+        bookWrapper.classList.remove('-translate-x-1/2');
+        bookWrapper.classList.add('translate-x-0');
+
+        // 2. Bìa lót: Hiện cả 2
+        backPlateLeft.classList.remove('opacity-0');
+        backPlateLeft.classList.add('opacity-100');
+        if(backPlateRight) backPlateRight.style.opacity = '1';
+
+        // 3. UI Controls
+        statusText.innerText = ">>> NAVIGATION CONTROLS ACTIVE <<<";
+        statusBar.innerText = `SHEET: 0${currentSheet} / 0${totalSheets}`;
+        controlsContainer.classList.remove('opacity-0', 'pointer-events-none');
+        controlsContainer.classList.add('opacity-100', 'pointer-events-auto');
+    }
+
+    // --- LOGIC Z-INDEX (GIỮ NGUYÊN) ---
     sheets.forEach((sheet, index) => {
         if (currentSheet > index) {
             sheet.style.transform = 'rotateY(-180deg)';
-            sheet.style.zIndex = index;
+            sheet.style.zIndex = index; 
         } else {
             sheet.style.transform = 'rotateY(0deg)';
-            sheet.style.zIndex = totalSheets - index;
+            sheet.style.zIndex = totalSheets - index; 
         }
     });
 
+    // --- LOGIC NÚT BẤM (GIỮ NGUYÊN) ---
     btnPrev.disabled = currentSheet === 0;
     btnNext.disabled = currentSheet === totalSheets;
+    
     btnPrev.style.opacity = currentSheet === 0 ? '0.3' : '1';
     btnNext.style.opacity = currentSheet === totalSheets ? '0.3' : '1';
+    
     btnPrev.style.cursor = currentSheet === 0 ? 'not-allowed' : 'pointer';
     btnNext.style.cursor = currentSheet === totalSheets ? 'not-allowed' : 'pointer';
 }
@@ -156,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const bootLogs = document.getElementById('boot-logs');
     const bootStatus = document.getElementById('boot-status');
     const loadingScreen = document.getElementById('loading-screen');
-    const messages = ["Connecting...", "Verifying User: DOAN QUOC HUY...", "Loading Assets...", "System Ready."];
+    const messages = ["Hello Teacher...", "I'm DOAN QUOC HUY...", "Loading Assets...", "System Ready."];
     let msgIndex = 0; let charIndex = 0;
 
     function typeLine() {

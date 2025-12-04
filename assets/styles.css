@@ -206,3 +206,23 @@
     /* Chạy vút qua */
     transition: 0.7s;
 }
+
+/* --- LINK TRACKING STYLES --- */
+
+/* Class này sẽ được JS thêm vào khi click */
+.link-clicked::after {
+    content: " [ĐÃ XEM]"; /* Nội dung hiển thị */
+    font-size: 10px;      /* Chữ nhỏ hơn link chính */
+    color: #94a3b8;       /* Màu xám (slate-400) cho đỡ rối mắt */
+    font-family: 'Share Tech Mono', monospace;
+    margin-left: 8px;     /* Cách link ra một chút */
+    opacity: 0.8;
+    font-style: italic;
+    animation: fadeIn 0.5s ease; /* Hiệu ứng hiện dần */
+}
+
+/* Hiệu ứng hiện dần nhẹ nhàng */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.8; }
+}

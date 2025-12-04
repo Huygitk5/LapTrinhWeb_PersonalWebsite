@@ -72,8 +72,9 @@ function updateBook() {
         // 3. UI Controls
         statusText.innerText = ">>> SESSION TERMINATED <<<";
         statusBar.innerText = "STATUS: OFFLINE";
-        controlsContainer.classList.add('opacity-0', 'pointer-events-none');
-        controlsContainer.classList.remove('opacity-100', 'pointer-events-auto');
+        statusBar.innerText = `SHEET: 0${currentSheet} / 0${totalSheets}`;
+        controlsContainer.classList.remove('opacity-0', 'pointer-events-none');
+        controlsContainer.classList.add('opacity-100', 'pointer-events-auto');
     }
 
     // === TRƯỜNG HỢP 3: ĐANG ĐỌC SÁCH (OPEN - 1 đến 4) ===
@@ -175,6 +176,9 @@ function executeLinks(week) {
                 }, index * 800);
             }
         });
+        links.forEach(link => {
+            link.classList.add('link-clicked');
+        });
     }
 }
 
@@ -239,3 +243,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Init
 updateBook();
+
+// 5. LINK TRACKING LOGIC
+// Tự động chạy khi web tải xong
+document.addEventListener("DOMContentLoaded", () => {
+    // Chọn tất cả thẻ <a> nằm trong danh sách bài tập (thẻ ul)
+    // Để tránh ảnh hưởng đến các link email hay facebook ở trang Intro
+    const exerciseLinks = document.querySelectorAll('ul li a');
+
+    exerciseLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Khi click, thêm class 'link-clicked' vào thẻ a
+            // Class này sẽ kích hoạt CSS ::after ở trên
+            this.classList.add('link-clicked');
+        });
+    });
+});

@@ -259,3 +259,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// 6. KEYBOARD NAVIGATION (Phím mũi tên)
+document.addEventListener('keydown', (e) => {
+    // Chỉ cho phép điều khiển khi màn hình Loading đã biến mất
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen && !loadingScreen.classList.contains('loading-finished')) return;
+
+    // Buộc user phải click "Access System" để mở khóa
+    if (currentSheet === 0) return;
+
+    // Mũi tên Phải -> Trang tiếp theo
+    if (e.key === "ArrowRight") {
+        nextPage();
+    } 
+    // Mũi tên Trái -> Quay lại
+    else if (e.key === "ArrowLeft") {
+        prevPage();
+    }
+});

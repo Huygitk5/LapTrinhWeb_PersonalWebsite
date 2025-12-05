@@ -14,7 +14,7 @@ const currentIndices = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
 // 2. LOGIC LẬT SÁCH
 let currentSheet = 0;
-const totalSheets = 5; // Bìa + 3 tờ nội dung
+const totalSheets = 5; // 2 Bìa + 3 tờ nội dung
 
 const bookWrapper = document.getElementById('book-wrapper');
 const backPlateLeft = document.getElementById('back-plate-left');

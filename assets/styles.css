@@ -226,3 +226,31 @@
     from { opacity: 0; }
     to { opacity: 0.8; }
 }
+
+/* --- STYLE 1: NEON PULSE LINK --- */
+.link-neon {
+    position: relative;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent;
+
+    color: #f472b6 !important; /* Màu xanh Cyan sáng rực (thay vì màu mờ) */
+    font-weight: bold;         /* Làm chữ đậm hơn để dễ nhìn */
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+
+.link-neon:hover {
+    color: #fff !important; /* Chữ chuyển trắng */
+    text-shadow: 0 0 5px #06b6d4, 0 0 10px #06b6d4, 0 0 20px #06b6d4; /* Bóng Neon xanh */
+    padding-left: 10px; /* Dịch sang phải */
+    border-bottom: 1px solid #06b6d4; /* Gạch chân phát sáng */
+    background: linear-gradient(90deg, rgba(6,182,212,0.1), transparent); /* Vệt sáng nền */
+}
+
+/* Icon mũi tên phía trước link cũng sáng theo */
+.link-neon:hover::before {
+    content: '>';
+    margin-right: 5px;
+    color: #fff;
+    animation: blink 0.5s infinite;
+}

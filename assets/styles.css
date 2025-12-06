@@ -233,7 +233,7 @@
     transition: all 0.3s ease;
     border-bottom: 1px solid transparent;
 
-    color: #f472b6 !important; /* Màu xanh Cyan sáng rực (thay vì màu mờ) */
+    color: #f472b6 !important;
     font-weight: bold;         /* Làm chữ đậm hơn để dễ nhìn */
     letter-spacing: 0.5px;
     text-shadow: 0 0 2px rgba(0,0,0,0.5);

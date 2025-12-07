@@ -351,6 +351,24 @@
     .sheet[data-index="1"] .grid-cols-\[80px_1fr\] {
         grid-template-columns: 60px 1fr !important; 
     }
+
+    /* 1. Thu nhỏ tiêu đề bài học (Mission Protocol Title) */
+    /* Loại trừ sheet 0 (trang bìa) và sheet 1 (profile) ra */
+    .sheet:not([data-index="0"]):not([data-index="1"]) h2.text-xl {
+        font-size: 0.9rem !important;  /* Giảm từ 1.25rem (20px) xuống còn khoảng 14px */
+        line-height: 1.3 !important;   /* Thu hẹp khoảng cách dòng */
+        min-height: 2.5rem !important; /* Giảm chiều cao tối thiểu của khung chứa tiêu đề */
+    }
+
+    /* 2. Thu nhỏ dòng chữ nhỏ "Mission Protocol XX" phía trên */
+    .sheet:not([data-index="0"]):not([data-index="1"]) .text-\[10px\] {
+        font-size: 0.55rem !important; /* Cho nhỏ hơn xíu nữa cho tinh tế */
+    }
+
+    /* 3. Thu nhỏ số trang lớn mờ mờ (01, 02, 03...) */
+    .sheet .text-4xl.opacity-50 {
+        font-size: 1.8rem !important; /* Giảm độ lớn của số nền */
+    }
 }
 
 /* --- CHẾ ĐỘ CUỘN CHO MÀN HÌNH NHỎ/THẤP --- */

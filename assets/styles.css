@@ -314,6 +314,43 @@
         padding: 0.5rem 1rem !important;
         font-size: 0.8rem !important;
     }
+
+    /* --- TINH CHỈNH TRANG PROFILE (SHEET 1) --- */
+
+    /* 1. Thu nhỏ phần EXECUTION PLAN (Các dòng mục tiêu) */
+    .sheet[data-index="1"] .text-sm {
+        font-size: 0.75rem !important; /* Giảm từ 14px xuống 12px (bằng text-xs) */
+        line-height: 1.4 !important;   /* Thu hẹp khoảng cách giữa các dòng */
+    }
+    
+    /* 2. Thu nhỏ phần CONTACT (Email và nút bấm) */
+    .sheet[data-index="1"] .text-xs {
+        font-size: 0.65rem !important; /* Giảm xuống khoảng 10px */
+    }
+
+    /* 3. Thu nhỏ Avatar và khung chứa thông tin cá nhân phía trên */
+    .sheet[data-index="1"] .w-32 { /* Avatar */
+        width: 6rem !important;   /* Nhỏ lại */
+        height: 6rem !important;
+    }
+    
+    .sheet[data-index="1"] h2.text-4xl { /* Chữ PROFILE to đùng */
+        font-size: 1.8rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    /* 4. Thu nhỏ phần thông tin chi tiết (NAME, ROLE, STATUS) */
+    /* Class gốc của nó là text-base (16px), ta giảm xuống */
+    .sheet[data-index="1"] .text-base {
+        font-size: 0.75rem !important; /* Giảm xuống khoảng 12px */
+        line-height: 1.4 !important;    /* Thu hẹp khoảng cách dòng */
+    }
+
+    /* (Tùy chọn) Thu hẹp cột tiêu đề "NAME:", "ROLE:" lại cho cân đối */
+    /* Class gốc là 80px, ta giảm còn 60px */
+    .sheet[data-index="1"] .grid-cols-\[80px_1fr\] {
+        grid-template-columns: 60px 1fr !important; 
+    }
 }
 
 /* --- CHẾ ĐỘ CUỘN CHO MÀN HÌNH NHỎ/THẤP --- */

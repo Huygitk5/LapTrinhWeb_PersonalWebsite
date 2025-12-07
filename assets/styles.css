@@ -255,147 +255,111 @@
     animation: blink 0.5s infinite;
 }
 
-/* --- FIX LỖI MẤT CHỮ TRÊN MÀN HÌNH THẤP (LAPTOP/TABLET) --- */
+/* ==========================================================================
+   TỐI ƯU HÓA NỘI DUNG KHI DÙNG CHIỀU CAO TỰ ĐỘNG (VH)
+   ========================================================================== */
 
-@media screen and (max-height: 800px) {
-    /* 1. Thu nhỏ toàn bộ cuốn sách để vừa khung nhìn */
-    .perspective-1500 {
-        transform: scale(0.85); /* Thu nhỏ còn 85% kích thước gốc */
-        transform-origin: center center;
+/* 1. KHI MÀN HÌNH CÓ CHIỀU CAO HẠN CHẾ (Laptop, Tablet ngang)
+   Áp dụng khi chiều cao < 850px (bất kể chiều rộng) */
+@media screen and (max-height: 850px) {
+
+    /* --- KHÔNG DÙNG TRANSFORM: SCALE NỮA --- */
+
+    /* Thu nhỏ dòng chữ System Standby phía trên */
+    #status-text {
+        font-size: 0.65rem;
+        margin-bottom: 2vh !important; /* Co giãn khoảng cách theo màn hình */
     }
 
-    /* 2. Tinh chỉnh riêng cho TRANG BÌA (data-index="0") */
+    /* --- TINH CHỈNH NỘI DUNG TRANG BÌA (SHEET 0) --- */
     
-    /* Giảm padding của cái khung viền bên trong */
+    /* 1. Giảm padding của khung viền */
     .sheet[data-index="0"] .absolute.inset-4 {
-        padding: 1rem !important; /* Gốc là p-6 */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly; /* Chia đều khoảng cách thay vì cố định */
+        padding: 1.5rem !important; 
+        gap: 0.5rem; /* Giảm khoảng cách giữa các phần tử flex */
     }
 
-    /* Thu nhỏ Icon Terminal */
+    /* 2. Thu nhỏ Logo Terminal */
     .sheet[data-index="0"] i[data-lucide="terminal"] {
-        width: 3rem !important;   /* Gốc là w-16 */
+        width: 3rem !important;    
         height: 3rem !important;
-        margin-bottom: 0.5rem !important; /* Gốc là mb-6 -> Giảm mạnh khoảng cách */
-    }
-
-    /* Thu nhỏ chữ PORTFOLIO */
-    .sheet[data-index="0"] h1 {
-        font-size: 2.5rem !important; /* Gốc là text-4xl */
-        margin-bottom: 0 !important;
-    }
-
-    /* Thu hẹp thanh gạch ngang màu xanh */
-    .sheet[data-index="0"] .w-24 {
-        margin-top: 0.5rem !important;
         margin-bottom: 0.5rem !important;
     }
 
-    /* Kéo phần khung Operator (Tên bạn) lên cao hơn */
-    .sheet[data-index="0"] .mb-8 {
-        margin-bottom: 1rem !important; /* Gốc là mb-8 -> Giảm xuống còn 1rem */
-    }
-}
-
-/* --- FIX LỖI MẤT CHỮ TRÊN MÀN HÌNH THẤP (LAPTOP/TABLET) --- */
-
-@media screen and (max-height: 800px) {
-    /* 1. Thu nhỏ toàn bộ cuốn sách để vừa khung nhìn */
-    .perspective-1500 {
-        transform: scale(0.85); /* Thu nhỏ còn 85% kích thước gốc */
-        transform-origin: center center;
-    }
-
-    /* 2. Tinh chỉnh riêng cho TRANG BÌA (data-index="0") */
-    
-    /* Giảm padding của cái khung viền bên trong */
-    .sheet[data-index="0"] .absolute.inset-4 {
-        padding: 1rem !important; /* Gốc là p-6 */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly; /* Chia đều khoảng cách thay vì cố định */
-    }
-
-    /* Thu nhỏ Icon Terminal */
-    .sheet[data-index="0"] i[data-lucide="terminal"] {
-        width: 3rem !important;   /* Gốc là w-16 */
-        height: 3rem !important;
-        margin-bottom: 0.5rem !important; /* Gốc là mb-6 -> Giảm mạnh khoảng cách */
-    }
-
-    /* Thu nhỏ chữ PORTFOLIO */
+    /* 3. Giảm cỡ chữ tiêu đề PORTFOLIO */
     .sheet[data-index="0"] h1 {
-        font-size: 2.5rem !important; /* Gốc là text-4xl */
+        font-size: 2rem !important; /* Giảm từ 4xl xuống 2rem */
+        line-height: 1.2;
         margin-bottom: 0 !important;
     }
 
-    /* Thu hẹp thanh gạch ngang màu xanh */
-    .sheet[data-index="0"] .w-24 {
+    /* 4. Chỉnh dòng chữ Web Development Log */
+    .sheet[data-index="0"] h2 {
+        font-size: 0.75rem !important;
         margin-top: 0.5rem !important;
-        margin-bottom: 0.5rem !important;
     }
 
-    /* Kéo phần khung Operator (Tên bạn) lên cao hơn */
+    /* 5. Ẩn thanh gạch ngang trang trí (để tiết kiệm chỗ dọc) */
+    .sheet[data-index="0"] .w-24 {
+        display: none !important;
+    }
+    
+    /* 6. Kéo phần tên Operator và nút bấm lên sát hơn */
     .sheet[data-index="0"] .mb-8 {
-        margin-bottom: 1rem !important; /* Gốc là mb-8 -> Giảm xuống còn 1rem */
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* 7. Thu nhỏ nút bấm START */
+    #start-btn {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.8rem !important;
     }
 }
 
-/* --- DÀNH CHO MÀN HÌNH CỰC THẤP (Dưới 600px) --- */
+/* --- CHẾ ĐỘ CUỘN CHO MÀN HÌNH NHỎ/THẤP --- */
+
+/* Áp dụng khi màn hình thấp dưới 700px (nơi quyển sách dễ bị che mất nút) */
+@media screen and (max-height: 700px) {
+    
+    body {
+        /* Cho phép cuộn dọc */
+        overflow-y: auto !important; 
+        
+        /* Bỏ căn giữa dọc (justify-center) để nội dung trôi từ trên xuống */
+        justify-content: flex-start !important; 
+        
+        /* Thêm khoảng trống đỉnh đầu để không bị dính sát mép */
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    /* Đảm bảo quyển sách không bị scale quá bé, cứ giữ kích thước vừa phải */
+    .perspective-1500 {
+        /* Cho phép chiều cao tự do một chút, không ép cứng 75vh */
+        height: auto !important; 
+        min-height: 400px; /* Chiều cao tối thiểu để sách không bị bẹp */
+        
+        /* Chừa khoảng trống dưới cùng để cuộn tới nút bấm */
+        margin-bottom: 80px !important; 
+    }
+
+    /* Đảm bảo thanh điều khiển (nút bấm) luôn hiển thị ở dưới cùng nội dung */
+    #controls-container {
+        margin-top: 1rem !important;
+        margin-bottom: 2rem !important;
+        position: relative !important; /* Không để fixed hay absolute làm trôi nút */
+    }
+}
+
+/* 2. KHI MÀN HÌNH CỰC THẤP (Dưới 600px - Điện thoại xoay ngang) */
 @media screen and (max-height: 600px) {
-    .perspective-1500 {
-        transform: scale(0.7); /* Thu nhỏ mạnh hơn nữa */
+    /* Ẩn luôn dòng chữ System Standby cho thoáng */
+    #status-text {
+        display: none !important;
     }
     
-    /* Ẩn dòng chữ System Standby ở trên cùng để tiết kiệm chỗ */
-    #status-text {
-        display: none;
-    }
-}
-
-/* --- FIX RIÊNG CHO LAPTOP MÀN HÌNH NGANG (16:9) --- */
-/* Áp dụng khi màn hình rộng (trên 1024px) nhưng chiều cao lại thấp (dưới 850px) */
-@media screen and (min-width: 1024px) and (max-height: 850px) {
-
-    /* 1. Thu nhỏ toàn bộ khối 3D lại 80% để vừa khít màn hình */
-    .perspective-1500 {
-        transform: scale(0.8);      /* Thu nhỏ */
-        transform-origin: center top; /* Neo ở giữa phía trên để không bị tụt xuống */
-        margin-top: -20px;          /* Kéo lên một chút bù lại khoảng trống */
-    }
-
-    /* 2. Xử lý dòng chữ "SYSTEM STANDBY..." phía trên */
-    #status-text {
-        margin-bottom: 0.5rem !important; /* Gốc là mb-8 (32px) -> Giảm còn 8px */
-        font-size: 0.65rem;               /* Cho chữ nhỏ lại chút cho đỡ chiếm chỗ */
-    }
-
-    /* 3. Tinh chỉnh lại nội dung bên trong trang bìa (cho thoáng hơn) */
-    .sheet[data-index="0"] .absolute.inset-4 {
-        padding: 1.5rem !important;       /* Giảm padding (Gốc p-6) */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 0.5rem;                      /* Giảm khoảng cách giữa các phần tử */
-    }
-
-    /* 4. Thu nhỏ Logo Terminal */
-    .sheet[data-index="0"] i[data-lucide="terminal"] {
-        width: 3rem !important;    /* Nhỏ lại */
-        height: 3rem !important;
-        margin-bottom: 0.5rem !important; /* Kéo chữ PORTFOLIO lên gần logo hơn */
-    }
-
-    /* 5. Chỉnh tiêu đề PORTFOLIO */
+    /* Thu nhỏ chữ tiêu đề mạnh hơn nữa */
     .sheet[data-index="0"] h1 {
-        font-size: 2.5rem !important; /* Giảm size chữ */
-        margin-bottom: 0 !important;  /* Bỏ margin thừa */
-    }
-    
-    /* 6. Chỉnh dòng tên Operator và nút bấm */
-    .sheet[data-index="0"] .mb-8 {
-        margin-bottom: 1rem !important; /* Kéo nút bấm lên gần tên hơn */
+        font-size: 1.5rem !important;
     }
 }

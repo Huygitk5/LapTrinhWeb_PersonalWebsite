@@ -254,3 +254,103 @@
     color: #fff;
     animation: blink 0.5s infinite;
 }
+
+/* --- FIX LỖI MẤT CHỮ TRÊN MÀN HÌNH THẤP (LAPTOP/TABLET) --- */
+
+@media screen and (max-height: 800px) {
+    /* 1. Thu nhỏ toàn bộ cuốn sách để vừa khung nhìn */
+    .perspective-1500 {
+        transform: scale(0.85); /* Thu nhỏ còn 85% kích thước gốc */
+        transform-origin: center center;
+    }
+
+    /* 2. Tinh chỉnh riêng cho TRANG BÌA (data-index="0") */
+    
+    /* Giảm padding của cái khung viền bên trong */
+    .sheet[data-index="0"] .absolute.inset-4 {
+        padding: 1rem !important; /* Gốc là p-6 */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly; /* Chia đều khoảng cách thay vì cố định */
+    }
+
+    /* Thu nhỏ Icon Terminal */
+    .sheet[data-index="0"] i[data-lucide="terminal"] {
+        width: 3rem !important;   /* Gốc là w-16 */
+        height: 3rem !important;
+        margin-bottom: 0.5rem !important; /* Gốc là mb-6 -> Giảm mạnh khoảng cách */
+    }
+
+    /* Thu nhỏ chữ PORTFOLIO */
+    .sheet[data-index="0"] h1 {
+        font-size: 2.5rem !important; /* Gốc là text-4xl */
+        margin-bottom: 0 !important;
+    }
+
+    /* Thu hẹp thanh gạch ngang màu xanh */
+    .sheet[data-index="0"] .w-24 {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    /* Kéo phần khung Operator (Tên bạn) lên cao hơn */
+    .sheet[data-index="0"] .mb-8 {
+        margin-bottom: 1rem !important; /* Gốc là mb-8 -> Giảm xuống còn 1rem */
+    }
+}
+
+/* --- FIX LỖI MẤT CHỮ TRÊN MÀN HÌNH THẤP (LAPTOP/TABLET) --- */
+
+@media screen and (max-height: 800px) {
+    /* 1. Thu nhỏ toàn bộ cuốn sách để vừa khung nhìn */
+    .perspective-1500 {
+        transform: scale(0.85); /* Thu nhỏ còn 85% kích thước gốc */
+        transform-origin: center center;
+    }
+
+    /* 2. Tinh chỉnh riêng cho TRANG BÌA (data-index="0") */
+    
+    /* Giảm padding của cái khung viền bên trong */
+    .sheet[data-index="0"] .absolute.inset-4 {
+        padding: 1rem !important; /* Gốc là p-6 */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly; /* Chia đều khoảng cách thay vì cố định */
+    }
+
+    /* Thu nhỏ Icon Terminal */
+    .sheet[data-index="0"] i[data-lucide="terminal"] {
+        width: 3rem !important;   /* Gốc là w-16 */
+        height: 3rem !important;
+        margin-bottom: 0.5rem !important; /* Gốc là mb-6 -> Giảm mạnh khoảng cách */
+    }
+
+    /* Thu nhỏ chữ PORTFOLIO */
+    .sheet[data-index="0"] h1 {
+        font-size: 2.5rem !important; /* Gốc là text-4xl */
+        margin-bottom: 0 !important;
+    }
+
+    /* Thu hẹp thanh gạch ngang màu xanh */
+    .sheet[data-index="0"] .w-24 {
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    /* Kéo phần khung Operator (Tên bạn) lên cao hơn */
+    .sheet[data-index="0"] .mb-8 {
+        margin-bottom: 1rem !important; /* Gốc là mb-8 -> Giảm xuống còn 1rem */
+    }
+}
+
+/* --- DÀNH CHO MÀN HÌNH CỰC THẤP (Dưới 600px) --- */
+@media screen and (max-height: 600px) {
+    .perspective-1500 {
+        transform: scale(0.7); /* Thu nhỏ mạnh hơn nữa */
+    }
+    
+    /* Ẩn dòng chữ System Standby ở trên cùng để tiết kiệm chỗ */
+    #status-text {
+        display: none;
+    }
+}

@@ -1,0 +1,93 @@
+body {
+    font-family: "Times New Roman", Arial, sans-serif;
+    line-height: 1.4;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+}
+/* Header Section */
+.header-table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+.photo-cell {
+    width: 120px;
+    vertical-align: top;
+}
+.photo-box {
+    width: 110px;       /* Chiều rộng cố định (khoảng 3cm) */
+    height: 140px;      /* Chiều cao cố định (khoảng 4cm) */
+    border: 1px solid #ddd;
+    overflow: hidden;   /* Cắt bỏ phần ảnh thừa ra ngoài khung */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-box img {
+    width: 100%;        /* Ảnh co giãn theo chiều rộng khung */
+    height: 100%;       /* Ảnh co giãn theo chiều cao khung */
+    object-fit: cover;  /* Quan trọng: Giúp ảnh cắt tự động để lấp đầy khung mà KHÔNG bị méo mặt */
+    object-position: center; /* Căn giữa ảnh */
+}
+.info-cell {
+    vertical-align: top;
+    padding-left: 20px;
+}
+.name {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.info-row {
+    display: flex;
+    margin-bottom: 5px;
+}
+.label {
+    width: 120px;
+    font-weight: bold;
+}
+
+/* Section Styling */
+h2 {
+    font-size: 16px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #000;
+    padding-bottom: 5px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+/* Content Tables */
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+.content-table td {
+    vertical-align: top;
+    padding-bottom: 10px;
+}
+.col-left {
+    width: 25%; /* Cột thời gian/Danh mục */
+    font-weight: bold;
+    color: #444;
+}
+.col-right {
+    width: 75%; /* Cột nội dung */
+}
+
+/* Skills Specific */
+.skill-item {
+    margin-bottom: 5px;
+}
+
+/* Introduction text */
+.intro {
+    font-style: italic;
+    margin-bottom: 20px;
+}
